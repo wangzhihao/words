@@ -1,5 +1,5 @@
 (function(angular) {
-  angular.module('wordsApp').directive('wordTag', function() {
+  angular.module('wordsApp').directive('wordTag', function($timeout) {
     return {
       templateUrl : 'js/words/partials/wordTag.html.tpl',
       restrict: 'AE',
@@ -14,26 +14,39 @@
 
         var front = iElm.find('.front'),
             back = iElm.find('.back'),
+            flipper = iElm.find('.flipper'),
             flipContainer = iElm.find('.flip-container');
         
         setHeight();
-
+ 
         function toggleFlip() {
           $scope.flip  = !$scope.flip;
           setHeight();
-
         }
 
         function setHeight(){
-          flipContainer.css('height', Math.max(front.outerHeight(), back.outerHeight()));
+          var delay = 200, duration = 300;
+          //flipContainer.css('height', Math.max(front.outerHeight(), back.outerHeight()));
           if(!$scope.flip){
-            front.css('position', 'static');
-            back.css('position', 'absolute');
-            flipContainer.css('max-height', front.outerHeight() + 'px');
+            if(front.outerHeight() > back.outerHeight()){
+              flipContainer.animate({height: front.outerHeight() + 'px'}, duration);
+              //flipContainer.css('max-height', front.outerHeight() + 'px');
+            }else{
+              $timeout(function(){
+                flipContainer.animate({height: front.outerHeight() + 'px'}, duration);
+                //flipContainer.css('max-height', front.outerHeight() + 'px');
+              }, delay);
+            }
           }else{
-            front.css('position', 'absolute');
-            back.css('position', 'static');
-            flipContainer.css('max-height', back.outerHeight() + 'px');
+            if(front.outerHeight() < back.outerHeight()){
+              flipContainer.animate({height: back.outerHeight() + 'px'}, duration);
+              //flipContainer.css('max-height', back.outerHeight() + 'px');
+            }else{
+              $timeout(function(){
+                flipContainer.animate({height: back.outerHeight() + 'px'}, duration);
+                //flipContainer.css('max-height', back.outerHeight() + 'px');
+              }, delay);
+            }
           }
         }
       }
