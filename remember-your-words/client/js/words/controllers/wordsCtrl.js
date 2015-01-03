@@ -31,14 +31,22 @@
 			ctrl.saveFlag = 0;
 		}
 
-		function removeWord(id){
-			wordsService.removeWord(id);
+		function removeWord(word){
+			ctrl.words = jQuery.grep(ctrl.words, function(item){
+  			return item.name !== word.name;
+			});
+			wordsService.removeWord(word.id).then(function(data){
+				//do nothing.
+			},function(error){
+				ctrl.words.push(word);
+			});
 		}
 
 		function saveWord(word){
 			ctrl.saveFlag = 0;
 			wordsService.saveWord(word).then(function(data){
 				ctrl.saveFlag = 1;
+				ctrl.words.push(data);
 			},function(error){
 				ctrl.saveFlag = 2;
 			});

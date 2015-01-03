@@ -9,3 +9,13 @@
 .add-one-word form .field{
 	margin: 20px 0;
 }
+
+.words-list .item {
+	position: relative;
+}
+
+.words-list .item .delete{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}

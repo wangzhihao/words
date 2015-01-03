@@ -78,17 +78,15 @@
                 <strong>Warning!</strong>Some errors happens, the save is not done.
             </div>
         </div>
-        <div ng-cloak ng-show="wordsCtrl.tab === 0" class="get-all-words jumbotron">
-            <div ng-repeat="word in wordsCtrl.words">
+        <div ng-cloak ng-show="wordsCtrl.tab === 0" class="words-list">
+            <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="item jumbotron">
                 <p>
-                    <span ng-bind="$index + ' '"></span>
-                    <span class="name" ng-bind="word.name"></span>
+                    <span class="label label-default" ng-bind="word.name"></span>
                 </p>
                 <p>
-                    definition:
                     <span class="definition" ng-bind="word.definition"></span>
                 </p>
-                <button ng-click="wordsCtrl.removeWord(word.id)">delete</button>
+                <a ng-click="wordsCtrl.removeWord(word)" class="delete"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
             </div>
         </div>
     </div>
