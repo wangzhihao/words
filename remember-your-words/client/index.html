@@ -1,5 +1,27 @@
-<head><title>LoopBack</title></head>
-<body>
-    <h1>LoopBack Rocks!</h1>
-    <p>Hello World... </p>
+<head>
+    <title>words</title>
+    <!-- third party scripts -->
+    <script src="js/third-parties/angular.js"></script>
+    <script src="js/third-parties/underscore.js"></script>
+    <script src="js/third-parties/restangular.min.js"></script>
+
+    <!-- AngularJs scripts --> 
+    <script src="js/words/app.js"></script>
+    <script src="js/words/services/wordsService.js"></script>
+    <script src="js/words/controllers/wordsCtrl.js"></script>
+</head>
+
+<body ng-app="wordsApp" ng-controller="wordsCtrl as wordsCtrl">
+    <h1>Remember your words easily!</h1>
+    <button ng-click="wordsCtrl.getAllWords()">get all words</button>
+    <div ng-repeat="word in wordsCtrl.words">
+    	<p>
+    		<span ng-bind="$index + ' '"></span>
+    		<span class="name" ng-bind="word.name"></span>
+    	</p>
+    	<p>
+    		definition: 
+    		<span class="definition" ng-bind="word.definition"></span>
+    	</p>
+    </div>
 </body>
