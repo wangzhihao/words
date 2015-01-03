@@ -8,7 +8,7 @@
     ]
   },
   "User": {
-    "dataSource": "wordsMongoDB"
+    "dataSource": "db"
   },
   "AccessToken": {
     "dataSource": "db",
