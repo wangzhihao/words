@@ -5,7 +5,7 @@
     <script src="js/third-parties/underscore.js"></script>
     <script src="js/third-parties/restangular.min.js"></script>
 
-    <!-- AngularJs scripts --> 
+    <!-- AngularJs scripts -->
     <script src="js/words/app.js"></script>
     <script src="js/words/services/wordsService.js"></script>
     <script src="js/words/controllers/wordsCtrl.js"></script>
@@ -13,15 +13,25 @@
 
 <body ng-app="wordsApp" ng-controller="wordsCtrl as wordsCtrl">
     <h1>Remember your words easily!</h1>
+    <div>
+        <form>
+            <label>Name: </label>
+            <input type="text" ng-model="wordsCtrl.newWord.name">
+            <label>Definition: </label>
+            <textarea ng-model="wordsCtrl.newWord.definition"></textarea>
+            <input type="submit" ng-click="wordsCtrl.saveWord(wordsCtrl.newWord)" value="Add a word">
+            <input type="button" ng-click="wordsCtrl.reset()" value="Cancel">
+        </form>
+    </div>
     <button ng-click="wordsCtrl.getAllWords()">get all words</button>
     <div ng-repeat="word in wordsCtrl.words">
-    	<p>
-    		<span ng-bind="$index + ' '"></span>
-    		<span class="name" ng-bind="word.name"></span>
-    	</p>
-    	<p>
-    		definition: 
-    		<span class="definition" ng-bind="word.definition"></span>
-    	</p>
+        <p>
+            <span ng-bind="$index + ' '"></span>
+            <span class="name" ng-bind="word.name"></span>
+        </p>
+        <p>
+            definition:
+            <span class="definition" ng-bind="word.definition"></span>
+        </p>
     </div>
 </body>

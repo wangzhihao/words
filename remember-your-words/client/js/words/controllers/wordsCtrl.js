@@ -8,12 +8,29 @@
 		var ctrl = this;
 
 		ctrl.words = {};
+		ctrl.newWord = {};
+
 		ctrl.getAllWords = getAllWords;
+		ctrl.reset = reset;
+		ctrl.saveWord = saveWord;
+
 
 		function getAllWords(){
 			wordsService.getWords().then(function(data){
 				console.log(data);
 				ctrl.words = data;
+			});
+		}
+
+		function reset(){
+			ctrl.newWord = {};
+		}
+
+		function saveWord(word){
+			wordsService.saveWord(word).then(function(data){
+				alert('Saved successfully!');
+			},function(error){
+				alert('Error occurs, the word is not saved.')
 			});
 		}
 	};
