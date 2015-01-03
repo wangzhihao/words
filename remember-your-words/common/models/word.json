@@ -1,0 +1,28 @@
+{
+  "name": "word",
+  "plural": "words",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "definition": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "importance": {
+      "type": "number"
+    },
+    "last-seen-date": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}
