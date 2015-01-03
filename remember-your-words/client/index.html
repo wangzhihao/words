@@ -9,7 +9,7 @@
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="css/words.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -19,28 +19,78 @@
 </head>
 
 <body ng-app="wordsApp" ng-controller="wordsCtrl as wordsCtrl">
-    <h1>Remember your words easily!</h1>
-    <div>
-        <form>
-            <label>Name: </label>
-            <input type="text" ng-model="wordsCtrl.newWord.name">
-            <label>Definition: </label>
-            <textarea ng-model="wordsCtrl.newWord.definition"></textarea>
-            <input type="submit" ng-click="wordsCtrl.saveWord(wordsCtrl.newWord)" value="Add a word">
-            <input type="button" ng-click="wordsCtrl.reset()" value="Cancel">
-        </form>
-    </div>
-    <button ng-click="wordsCtrl.getAllWords()">get all words</button>
-    <div ng-repeat="word in wordsCtrl.words">
-        <p>
-            <span ng-bind="$index + ' '"></span>
-            <span class="name" ng-bind="word.name"></span>
-        </p>
-        <p>
-            definition:
-            <span class="definition" ng-bind="word.definition"></span>
-        </p>
-        <button ng-click="wordsCtrl.removeWord(word.id)">delete</button>
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Words</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{ active : wordsCtrl.tab === 0}"><a href="#" ng-click="wordsCtrl.tab = 0">List all words</a>
+                    </li>
+                    <li ng-class="{ active : wordsCtrl.tab === 1}"><a href="#" ng-click="wordsCtrl.tab = 1">Add a word</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <div class="container">
+        <div ng-cloak ng-show="wordsCtrl.tab === 1" class="add-one-word">
+            <form>
+                <div class="field">
+                    <label>Name: </label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@</span>
+                        <input type="text" class="form-control" placeholder="name" aria-describedby="basic-addon1" ng-model="wordsCtrl.newWord.name">
+                    </div>
+                </div>
+                <div class="field">
+                		<label>Definition: </label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">define</span>
+                        <input type="text" class="form-control" placeholder="definition" aria-describedby="basic-addon2" ng-model="wordsCtrl.newWord.definition">
+                    </div>
+                </div>
+
+                <div class="operations">
+                    <button type="button" class="btn btn-primary" ng-click="wordsCtrl.saveWord(wordsCtrl.newWord)">Add a word</button>
+
+                    <button type="button" class="btn btn-default" ng-click="wordsCtrl.reset()">Cancel</button>
+                </div>
+            </form>
+            <div class="alert alert-success" role="alert" ng-show="wordsCtrl.saveFlag === 1">
+                <strong>Well done!</strong> You successfully save the word.
+            </div>
+            <div class="alert alert-warning" role="alert" ng-show="wordsCtrl.saveFlag === 2">
+                <strong>Warning!</strong>Some errors happens, the save is not done.
+            </div>
+        </div>
+        <div ng-cloak ng-show="wordsCtrl.tab === 0" class="get-all-words jumbotron">
+            <div ng-repeat="word in wordsCtrl.words">
+                <p>
+                    <span ng-bind="$index + ' '"></span>
+                    <span class="name" ng-bind="word.name"></span>
+                </p>
+                <p>
+                    definition:
+                    <span class="definition" ng-bind="word.definition"></span>
+                </p>
+                <button ng-click="wordsCtrl.removeWord(word.id)">delete</button>
+            </div>
+        </div>
     </div>
 
     <!-- third party scripts -->

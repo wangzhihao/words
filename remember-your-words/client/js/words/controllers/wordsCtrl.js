@@ -9,12 +9,15 @@
 
 		ctrl.words = {};
 		ctrl.newWord = {};
+		ctrl.saveFlag = 0;
+		ctrl.tab = 0;
 
 		ctrl.getAllWords = getAllWords;
 		ctrl.reset = reset;
 		ctrl.removeWord = removeWord;
 		ctrl.saveWord = saveWord;
 
+		ctrl.getAllWords();
 
 		function getAllWords(){
 			wordsService.getWords().then(function(data){
@@ -25,6 +28,7 @@
 
 		function reset(){
 			ctrl.newWord = {};
+			ctrl.saveFlag = 0;
 		}
 
 		function removeWord(id){
@@ -32,10 +36,11 @@
 		}
 
 		function saveWord(word){
+			ctrl.saveFlag = 0;
 			wordsService.saveWord(word).then(function(data){
-				alert('Saved successfully!');
+				ctrl.saveFlag = 1;
 			},function(error){
-				alert('Error occurs, the word is not saved.')
+				ctrl.saveFlag = 2;
 			});
 		}
 	};

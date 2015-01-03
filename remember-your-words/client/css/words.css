@@ -1,0 +1,11 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.add-one-word form .operations{
+	margin-top: 20px;
+}
+
+.add-one-word form .field{
+	margin: 20px 0;
+}
