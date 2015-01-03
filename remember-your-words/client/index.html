@@ -79,7 +79,7 @@
             </div>
         </div>
         <div ng-cloak ng-show="wordsCtrl.tab === 0" class="words-list">
-            <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="item jumbotron">
+            <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="repeated-item item jumbotron">
                 <p>
                     <span class="label label-default" ng-bind="word.name"></span>
                 </p>
@@ -95,6 +95,7 @@
     <script src="js/third-parties/jquery.min.js"></script>
     <script src="js/third-parties/bootstrap.min.js"></script>
     <script src="js/third-parties/angular.js"></script>
+    <script src="js/third-parties/angular-animate.min.js"></script>
     <script src="js/third-parties/underscore.js"></script>
     <script src="js/third-parties/restangular.min.js"></script>
 
