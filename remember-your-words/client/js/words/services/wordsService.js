@@ -7,7 +7,9 @@
 	function wordsService(Restangular){
 		var service = {
 			getWords : getWords,
-			saveWord : saveWord
+			removeWord : removeWord,
+			saveWord : saveWord,
+			updateWord : updateWord
 		};
 
 		var httpService = Restangular.withConfig(function(RestangularConfigurer) {
@@ -19,9 +21,17 @@
 		function getWords(){
 			return httpService.all('words').getList();
 		}
+		
+		function removeWord(id){
+			return httpService.all('words').one(id).remove();
+		}
 
 		function saveWord(word){
-			return httpService.all('words').post(word, undefined, undefined);
+			return httpService.all('words').post(word);
+		}
+
+		function updateWord(id, word){
+			return httpService.all('words').one(id).customPUT(word);
 		}
 	};
 })(angular);
