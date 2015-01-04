@@ -15,8 +15,9 @@
 .words-list .item .delete{
   position: absolute;
   cursor: pointer;
-  top: 5px;
-  right: 5px;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
 }
 
 .google-define{

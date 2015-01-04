@@ -83,7 +83,7 @@
             <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="repeated-item item jumbotron">
                 <p>
                     <span class="label label-default" ng-bind="word.name"></span>
-                    <a ng-href="https://www.google.com/search?q=define+{{word.name}}" class="google-define" target="_blank"><span class="glyphicon glyphicon-search black" aria-hidden="true"></span></a>
+                    <a ng-href="https://www.google.com/search?q=define+{{word.name}}" class="google-define" target="_blank"  data-toggle="tooltip" data-placement="right" title="search on google" words-add-tooltip><span class="glyphicon glyphicon-search black" aria-hidden="true"></span></a>
                 </p>
                 <p>
                     <span class="definition" ng-bind="word.definition"></span>
@@ -105,6 +105,10 @@
     <script src="js/words/app.js"></script>
     <script src="js/words/services/wordsService.js"></script>
     <script src="js/words/controllers/wordsCtrl.js"></script>
+    <script src="js/words/directives/addTooltipDirective.js"></script>   
+
+    <!-- other scripts -->
+    <script src="js/non-angular/common.js"></script>
 </body>
 
 </html>
