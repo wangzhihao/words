@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="//bits.wikimedia.org/favicon/wikipedia.ico">
     <title>words</title>
 
     <!-- Bootstrap -->
@@ -82,11 +83,12 @@
             <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="repeated-item item jumbotron">
                 <p>
                     <span class="label label-default" ng-bind="word.name"></span>
+                    <a ng-href="https://www.google.com/search?q=define+{{word.name}}" class="google-define" target="_blank"><span class="glyphicon glyphicon-search black" aria-hidden="true"></span></a>
                 </p>
                 <p>
                     <span class="definition" ng-bind="word.definition"></span>
                 </p>
-                <a ng-click="wordsCtrl.removeWord(word)" class="delete"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+                <a ng-click="wordsCtrl.removeWord(word)" class="delete"><span class="glyphicon glyphicon-remove black" aria-hidden="true"></span></a>
             </div>
         </div>
     </div>

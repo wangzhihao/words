@@ -14,10 +14,15 @@
 
 .words-list .item .delete{
   position: absolute;
-  top: 0px;
-  right: 0px;
+  cursor: pointer;
+  top: 5px;
+  right: 5px;
 }
 
+.google-define{
+	cursor: pointer;
+	vertical-align: middle;
+}
 
 /*
   We're using CSS transitions for when
@@ -78,4 +83,8 @@
 @-o-keyframes my_animation {
   from { opacity:1; }
   to { opacity:0; }
+}
+
+.black{
+	color: #777;
 }
