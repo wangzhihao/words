@@ -82,12 +82,19 @@
         <div ng-cloak ng-show="wordsCtrl.tab === 0" class="words-list">
             <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="repeated-item item jumbotron">
                 <p>
-                    <span class="label label-default" ng-bind="word.name"></span>
+                    <span class="label label-primary" ng-bind="word.name"></span>
                     <a ng-href="https://www.google.com/search?q=define+{{word.name}}" class="google-define" target="_blank"  data-toggle="tooltip" data-placement="right" title="search on google" words-add-tooltip><span class="glyphicon glyphicon-search black" aria-hidden="true"></span></a>
                 </p>
                 <p>
                     <span class="definition" ng-bind="word.definition"></span>
                 </p>
+                <div ng-if="word.examples.length">
+                    <span class="label label-default" >Examples :</span> 
+                    <p ng-repeat="example in word.examples">
+                        <span ng-if="example.type === 'text' " ng-bind="example.value"></span>
+                        <img ng-if="example.type === 'image'" ng-src="{{example.value}}">
+                    </p>
+                </div>
                 <a ng-click="wordsCtrl.removeWord(word)" class="delete"><span class="glyphicon glyphicon-remove black" aria-hidden="true"></span></a>
             </div>
         </div>
