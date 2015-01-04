@@ -51,26 +51,45 @@
     <div class="container">
         <div ng-cloak ng-show="wordsCtrl.tab === 1" class="add-one-word">
             <form>
-                <div class="field">
-                    <label>Name: </label>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="name" aria-describedby="basic-addon1" ng-model="wordsCtrl.newWord.name">
-                    </div>
-                </div>
-                <div class="field">
-                		<label>Definition: </label>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="basic-addon2">define</span>
-                        <input type="text" class="form-control" placeholder="definition" aria-describedby="basic-addon2" ng-model="wordsCtrl.newWord.definition">
-                    </div>
+
+                <div class="form-group">
+                    <label for="name1">Name: </label>
+                    <input type="text" class="form-control" placeholder="name" id="name1" ng-model="wordsCtrl.newWord.name">
                 </div>
 
-                <div class="operations">
-                    <button type="button" class="btn btn-default" ng-click="wordsCtrl.reset()">Cancel</button>
-
-                    <button type="button" class="btn btn-primary" ng-click="wordsCtrl.saveWord(wordsCtrl.newWord)">Add a word</button>
+                <div class="form-group">
+                    <label for="define1">Define: </label>
+                    <textarea class="form-control" rows="3" placeholder="type the definition" id="define1" ng-model="wordsCtrl.newWord.definition"></textarea>
                 </div>
+                <div class="form-group">
+                    <label for="examples">Examples: </label>
+                    <div class="input-group words-example" ng-repeat="example in wordsCtrl.newWord.examples">
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{example.type}} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a ng-click="example.type = 'Text' ">Text</a>
+                                </li>
+                                <li><a ng-click="example.type = 'Image' ">Image</a>
+                                </li>
+                                <li><a ng-click="example.type = 'Video' ">Video</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /btn-group -->
+                        <input type="text" class="form-control" ng-model="example.value">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="wordsCtrl.addNewExample(wordsCtrl.newWord)" ng-if="$last">Add another example</button>
+                            <button class="btn btn-default" type="button" ng-click="wordsCtrl.newWord.examples.splice($index, 1)" ng-if="!$last">Remove this example</button>
+                        </span>
+                    </div>
+                    <!-- /input-group -->
+                    <span id="helpBlock" class="help-block">To save disk space, the image and video resources are all links. The images can store in Google Drive, and videos can store in Youtube.<br>Currently the video format should be a embeded one like http://www.youtube.com/embed/ky4CdN0x58A</span>
+                </div>
+                <button type="reset" class="btn btn-default" ng-click="wordsCtrl.reset()">Clear</button>
+
+                <button type="submit" class="btn btn-primary" ng-click="wordsCtrl.saveWord(wordsCtrl.newWord)">Add a word</button>
+
             </form>
             <div class="alert alert-success" role="alert" ng-show="wordsCtrl.saveFlag === 1">
                 <strong>Well done!</strong> You successfully save the word.
@@ -83,16 +102,17 @@
             <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="repeated-item item jumbotron">
                 <p>
                     <span class="label label-primary" ng-bind="word.name"></span>
-                    <a ng-href="https://www.google.com/search?q=define+{{word.name}}" class="google-define" target="_blank"  data-toggle="tooltip" data-placement="right" title="search on google" words-add-tooltip><span class="glyphicon glyphicon-search black" aria-hidden="true"></span></a>
+                    <a ng-href="https://www.google.com/search?q=define+{{word.name}}" class="google-define" target="_blank" data-toggle="tooltip" data-placement="right" title="search on google" words-add-tooltip><span class="glyphicon glyphicon-search black" aria-hidden="true"></span></a>
                 </p>
                 <p>
                     <span class="definition" ng-bind="word.definition"></span>
                 </p>
                 <div ng-if="word.examples.length">
-                    <span class="label label-default" >Examples :</span> 
+                    <span class="label label-default">Examples :</span>
                     <p ng-repeat="example in word.examples">
-                        <span ng-if="example.type === 'text' " ng-bind="example.value"></span>
-                        <img ng-if="example.type === 'image'" ng-src="{{example.value}}">
+                        <span ng-if="example.type === 'Text' " ng-bind="example.value"></span>
+                        <img ng-if="example.type === 'Image'" ng-src="{{example.value}}">
+                        <iframe ng-if="example.type === 'Video'" width="640" height="390" ng-src="{{example.value}}" frameborder="0" allowfullscreen></iframe>
                     </p>
                 </div>
                 <a ng-click="wordsCtrl.removeWord(word)" class="delete"><span class="glyphicon glyphicon-remove black" aria-hidden="true"></span></a>
@@ -112,7 +132,7 @@
     <script src="js/words/app.js"></script>
     <script src="js/words/services/wordsService.js"></script>
     <script src="js/words/controllers/wordsCtrl.js"></script>
-    <script src="js/words/directives/addTooltipDirective.js"></script>   
+    <script src="js/words/directives/addTooltipDirective.js"></script>
 
     <!-- other scripts -->
     <script src="js/non-angular/common.js"></script>

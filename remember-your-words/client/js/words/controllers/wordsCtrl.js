@@ -8,16 +8,40 @@
 		var ctrl = this;
 
 		ctrl.words = {};
-		ctrl.newWord = {};
+		ctrl.newWord = initialWord();
 		ctrl.saveFlag = 0;
 		ctrl.tab = 0;
 
+		ctrl.addNewExample = addNewExample;
 		ctrl.getAllWords = getAllWords;
 		ctrl.reset = reset;
 		ctrl.removeWord = removeWord;
 		ctrl.saveWord = saveWord;
 
 		ctrl.getAllWords();
+
+		function addNewExample(word){
+			if( word.examples ){
+				word.examples.push({
+					type : 'Text',
+					value : ''
+				});
+			}else{
+				word['examples'] = [{
+					type : 'Text',
+					value : ''
+				}];
+			}
+		}
+
+		function initialWord(){
+			return {
+				examples : [{
+					type : 'Text',
+					value : ''
+				}]
+			};
+		}
 
 		function getAllWords(){
 			wordsService.getWords().then(function(data){
@@ -27,7 +51,7 @@
 		}
 
 		function reset(){
-			ctrl.newWord = {};
+			ctrl.newWord = initialWord();
 			ctrl.saveFlag = 0;
 		}
 

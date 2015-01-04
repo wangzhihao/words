@@ -2,10 +2,12 @@
   display: none !important;
 }
 
-.add-one-word form .operations,
-.add-one-word form .alert,
-.add-one-word form .field{
-	margin: 20px 0;
+a{
+  cursor: pointer;
+}
+
+.words-example{
+  margin: 5px 0;
 }
 
 .words-list .item {
@@ -14,14 +16,12 @@
 
 .words-list .item .delete{
   position: absolute;
-  cursor: pointer;
   top: 10px;
   right: 10px;
   font-size: 20px;
 }
 
 .google-define{
-	cursor: pointer;
 	vertical-align: middle;
 }
 
