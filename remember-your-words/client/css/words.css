@@ -14,15 +14,17 @@ a{
 	position: relative;
 }
 
-.words-list .item .delete{
+.words-list .item .operations{
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 0;
   font-size: 20px;
 }
 
-.google-define{
-	vertical-align: middle;
+.words-list .item .operations .edit,
+.words-list .item .operations .search-on-google,
+.words-list .item .operations .delete{
+  margin-right: 20px;
 }
 
 /*

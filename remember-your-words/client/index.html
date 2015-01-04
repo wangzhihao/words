@@ -49,7 +49,7 @@
     </nav>
 
     <div class="container">
-        <div ng-cloak ng-show="wordsCtrl.tab === 1" class="add-one-word">
+        <div ng-cloak ng-show="wordsCtrl.tab === 1" class="add-one-word jumbotron">
             <form>
 
                 <div class="form-group">
@@ -102,7 +102,6 @@
             <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="repeated-item item jumbotron">
                 <p>
                     <span class="label label-primary" ng-bind="word.name"></span>
-                    <a ng-href="https://www.google.com/search?q=define+{{word.name}}" class="google-define" target="_blank" data-toggle="tooltip" data-placement="right" title="search on google" words-add-tooltip><span class="glyphicon glyphicon-search black" aria-hidden="true"></span></a>
                 </p>
                 <p>
                     <span class="definition" ng-bind="word.definition"></span>
@@ -115,7 +114,12 @@
                         <iframe ng-if="example.type === 'Video'" width="640" height="390" ng-src="{{example.value}}" frameborder="0" allowfullscreen></iframe>
                     </p>
                 </div>
-                <a ng-click="wordsCtrl.removeWord(word)" class="delete"><span class="glyphicon glyphicon-remove black" aria-hidden="true"></span></a>
+                <div class="operations">
+                    <a class="search-on-google operation" ng-href="https://www.google.com/search?q=define+{{word.name}}" class="google-define" target="_blank" data-toggle="tooltip" data-placement="top" title="search on google" words-add-tooltip><span class="glyphicon glyphicon-search black" aria-hidden="true"></span></a>
+                    <a class="edit operation" ng-click=""  data-toggle="tooltip" data-placement="top" title="edit it" words-add-tooltip><span class="glyphicon glyphicon-pencil black" aria-hidden="true"></span></a>
+                    <a class="delete operation" ng-click="wordsCtrl.removeWord(word)" data-toggle="tooltip" data-placement="top" title="delete it" words-add-tooltip><span class="glyphicon glyphicon-remove black" aria-hidden="true"></span></a>
+                </div>
+
             </div>
         </div>
     </div>
