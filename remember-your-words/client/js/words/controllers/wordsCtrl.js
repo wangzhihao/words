@@ -32,12 +32,7 @@
 		}
 
 		function editWord(word){
-			if(word){
-				//deep copy.
-				ctrl.newWord = jQuery.extend(true, {}, word);
-			}else{
-				ctrl.newWord = initialWord();
-			}
+			ctrl.reset(word);
 			$('#editWord').modal();
 		}
 
@@ -54,8 +49,13 @@
 			});
 		}
 
-		function reset(){
-			ctrl.newWord = initialWord();
+		function reset(word){
+			if(word){
+				//deep copy.
+				ctrl.newWord = jQuery.extend(true, {}, word);
+			}else{
+				ctrl.newWord = initialWord();
+			}
 			ctrl.saveFlag = 0;
 		}
 
