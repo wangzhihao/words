@@ -19,6 +19,11 @@
     },
     "last-seen-date": {
       "type": "date"
+    },
+    "examples": {
+      "type": [
+        "object"
+      ]
     }
   },
   "validations": [],
