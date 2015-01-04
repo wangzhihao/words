@@ -39,7 +39,7 @@
                 <ul class="nav navbar-nav">
                     <li ng-class="{ active : wordsCtrl.tab === 0}"><a href="#" ng-click="wordsCtrl.tab = 0">List all words</a>
                     </li>
-                    <li ng-class="{ active : wordsCtrl.tab === 1}"><a href="#" ng-click="wordsCtrl.tab = 1">Add a word</a>
+                    <li><a ng-click="wordsCtrl.editWord()">Add a word</a>
                     </li>
                 </ul>
             </div>
@@ -49,14 +49,47 @@
     </nav>
 
     <div class="container">
-        <div ng-cloak ng-show="wordsCtrl.tab === 1" class="add-one-word jumbotron">
-            <form>
+        <div ng-cloak ng-show="wordsCtrl.tab === 0" class="words-list">
+            <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="repeated-item item jumbotron">
+                <p>
+                    <span class="label label-primary" ng-bind="word.name"></span>
+                </p>
+                <p>
+                    <span class="definition" ng-bind="word.definition"></span>
+                </p>
+                <div ng-if="word.examples.length">
+                    <span class="label label-default">Examples :</span>
+                    <p ng-repeat="example in word.examples">
+                        <span ng-if="example.type === 'Text' " ng-bind="example.value"></span>
+                        <img ng-if="example.type === 'Image'" ng-src="{{example.value}}">
+                        <iframe ng-if="example.type === 'Video'" width="640" height="390" ng-src="{{example.value}}" frameborder="0" allowfullscreen></iframe>
+                    </p>
+                </div>
+                <div class="operations">
+                    <a class="search-on-google operation" ng-href="https://www.google.com/search?q=define+{{word.name}}" class="google-define" target="_blank" data-toggle="tooltip" data-placement="top" title="search on google" words-add-tooltip><span class="glyphicon glyphicon-search black" aria-hidden="true"></span></a>
+                    <a class="edit operation" ng-click="wordsCtrl.editWord(word)"  data-toggle="tooltip" data-placement="top" title="edit it" words-add-tooltip><span class="glyphicon glyphicon-pencil black" aria-hidden="true"></span></a>
+                    <a class="delete operation" ng-click="wordsCtrl.removeWord(word)" data-toggle="tooltip" data-placement="top" title="delete it" words-add-tooltip><span class="glyphicon glyphicon-remove black" aria-hidden="true"></span></a>
+                </div>
 
+            </div>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="editWord" tabindex="-1" role="dialog" aria-labelledby="editWordLabel" aria-hidden="true" words-dialog-localization>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="editWordLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="">
+            <form>
                 <div class="form-group">
                     <label for="name1">Name: </label>
                     <input type="text" class="form-control" placeholder="name" id="name1" ng-model="wordsCtrl.newWord.name">
                 </div>
-
                 <div class="form-group">
                     <label for="define1">Define: </label>
                     <textarea class="form-control" rows="3" placeholder="type the definition" id="define1" ng-model="wordsCtrl.newWord.definition"></textarea>
@@ -79,51 +112,29 @@
                         <!-- /btn-group -->
                         <input type="text" class="form-control" ng-model="example.value">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="wordsCtrl.addNewExample(wordsCtrl.newWord)" ng-if="$last">Add another example</button>
-                            <button class="btn btn-default" type="button" ng-click="wordsCtrl.newWord.examples.splice($index, 1)" ng-if="!$last">Remove this example</button>
+                            <button class="btn btn-default" type="button" ng-click="wordsCtrl.newWord.examples.splice($index, 1)">Remove this example</button>
                         </span>
                     </div>
+                    <button class="btn btn-default" type="button" ng-click="wordsCtrl.addNewExample(wordsCtrl.newWord)">Add an example</button>
                     <!-- /input-group -->
-                    <span id="helpBlock" class="help-block">To save disk space, the image and video resources are all links. The images can store in Google Drive, and videos can store in Youtube.<br>Currently the video format should be a embeded one like http://www.youtube.com/embed/ky4CdN0x58A</span>
+                    <span id="helpBlock" class="help-block">To save disk space, the image and video resources are all links. The images can store in Google Drive, and videos can store in Youtube. Currently the video format should be a embeded one like http://www.youtube.com/embed/ky4CdN0x58A</span>
                 </div>
-                <button type="reset" class="btn btn-default" ng-click="wordsCtrl.reset()">Clear</button>
-
-                <button type="submit" class="btn btn-primary" ng-click="wordsCtrl.saveWord(wordsCtrl.newWord)">Add a word</button>
-
             </form>
             <div class="alert alert-success" role="alert" ng-show="wordsCtrl.saveFlag === 1">
                 <strong>Well done!</strong> You successfully save the word.
             </div>
             <div class="alert alert-warning" role="alert" ng-show="wordsCtrl.saveFlag === 2">
-                <strong>Warning!</strong>Some errors happens, the save is not done.
+                <strong>Warning!</strong> Some errors happens, the save is not done.
             </div>
         </div>
-        <div ng-cloak ng-show="wordsCtrl.tab === 0" class="words-list">
-            <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="repeated-item item jumbotron">
-                <p>
-                    <span class="label label-primary" ng-bind="word.name"></span>
-                </p>
-                <p>
-                    <span class="definition" ng-bind="word.definition"></span>
-                </p>
-                <div ng-if="word.examples.length">
-                    <span class="label label-default">Examples :</span>
-                    <p ng-repeat="example in word.examples">
-                        <span ng-if="example.type === 'Text' " ng-bind="example.value"></span>
-                        <img ng-if="example.type === 'Image'" ng-src="{{example.value}}">
-                        <iframe ng-if="example.type === 'Video'" width="640" height="390" ng-src="{{example.value}}" frameborder="0" allowfullscreen></iframe>
-                    </p>
-                </div>
-                <div class="operations">
-                    <a class="search-on-google operation" ng-href="https://www.google.com/search?q=define+{{word.name}}" class="google-define" target="_blank" data-toggle="tooltip" data-placement="top" title="search on google" words-add-tooltip><span class="glyphicon glyphicon-search black" aria-hidden="true"></span></a>
-                    <a class="edit operation" ng-click=""  data-toggle="tooltip" data-placement="top" title="edit it" words-add-tooltip><span class="glyphicon glyphicon-pencil black" aria-hidden="true"></span></a>
-                    <a class="delete operation" ng-click="wordsCtrl.removeWord(word)" data-toggle="tooltip" data-placement="top" title="delete it" words-add-tooltip><span class="glyphicon glyphicon-remove black" aria-hidden="true"></span></a>
-                </div>
-
-            </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="wordsCtrl.reset()">Close</button>
+        <button type="button" class="btn btn-primary words-action" ng-click="wordsCtrl.saveWord(wordsCtrl.newWord)">Save changes</button>
+      </div>
     </div>
-
+  </div>
+</div>
     <!-- third party scripts -->
     <script src="js/third-parties/jquery.min.js"></script>
     <script src="js/third-parties/bootstrap.min.js"></script>
@@ -137,6 +148,7 @@
     <script src="js/words/services/wordsService.js"></script>
     <script src="js/words/controllers/wordsCtrl.js"></script>
     <script src="js/words/directives/addTooltipDirective.js"></script>
+    <script src="js/words/directives/wordsDialogLocalizationDirective.js"></script>
 
     <!-- other scripts -->
     <script src="js/non-angular/common.js"></script>

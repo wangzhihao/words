@@ -13,6 +13,7 @@
 		ctrl.tab = 0;
 
 		ctrl.addNewExample = addNewExample;
+		ctrl.editWord = editWord;
 		ctrl.getAllWords = getAllWords;
 		ctrl.reset = reset;
 		ctrl.removeWord = removeWord;
@@ -21,25 +22,28 @@
 		ctrl.getAllWords();
 
 		function addNewExample(word){
-			if( word.examples ){
-				word.examples.push({
-					type : 'Text',
-					value : ''
-				});
-			}else{
-				word['examples'] = [{
-					type : 'Text',
-					value : ''
-				}];
+			if( !word.examples ){
+				word['examples'] = []
 			}
+			word.examples.push({
+				type : 'Text',
+				value : ''
+			});
+		}
+
+		function editWord(word){
+			if(word){
+				//deep copy.
+				ctrl.newWord = jQuery.extend(true, {}, word);
+			}else{
+				ctrl.newWord = initialWord();
+			}
+			$('#editWord').modal();
 		}
 
 		function initialWord(){
 			return {
-				examples : [{
-					type : 'Text',
-					value : ''
-				}]
+				examples : []
 			};
 		}
 
@@ -55,10 +59,14 @@
 			ctrl.saveFlag = 0;
 		}
 
-		function removeWord(word){
+		function removeWordLocal(word){
 			ctrl.words = jQuery.grep(ctrl.words, function(item){
-  			return item.name !== word.name;
+  			return item.id !== word.id;
 			});
+		}
+
+		function removeWord(word){
+			removeWordLocal(word);
 			wordsService.removeWord(word.id).then(function(data){
 				//do nothing.
 			},function(error){
@@ -68,12 +76,22 @@
 
 		function saveWord(word){
 			ctrl.saveFlag = 0;
-			wordsService.saveWord(word).then(function(data){
-				ctrl.saveFlag = 1;
-				ctrl.words.push(data);
-			},function(error){
-				ctrl.saveFlag = 2;
-			});
+			if(word.id){
+				wordsService.updateWord(word).then(function(data){
+					ctrl.saveFlag = 1;
+					removeWordLocal(word);
+					ctrl.words.push(data);
+				},function(error){
+					ctrl.saveFlag = 2;
+				});
+			}else{
+				wordsService.saveWord(word).then(function(data){
+					ctrl.saveFlag = 1;
+					ctrl.words.push(data);
+				},function(error){
+					ctrl.saveFlag = 2;
+				});
+			}
 		}
 	};
 })(angular);

@@ -30,8 +30,8 @@
 			return httpService.all('words').post(word);
 		}
 
-		function updateWord(id, word){
-			return httpService.all('words').one(id).customPUT(word);
+		function updateWord(word){
+			return httpService.all('words').one(word.id).customPUT(word);
 		}
 	};
 })(angular);
