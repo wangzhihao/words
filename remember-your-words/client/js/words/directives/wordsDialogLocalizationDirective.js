@@ -1,6 +1,7 @@
 (function(angular) {
   angular.module('wordsApp').directive('wordsDialogLocalization', function() {
     return {
+    	restrict: 'A',
       link: function($scope, iElm, iAttrs, controller) {
        	iElm.on('show.bs.modal', function (event) {
        		var ctrl = $scope.wordsCtrl;
