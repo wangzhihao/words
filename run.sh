@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
-ROOT_DIR=/Users/wangzhihao/Workspace/words
+ROOT_DIR=$( cd "$( dirname "$0" )" && pwd )
 
-SERVER_DIR=$ROOT_DIR/site/remember-your-words/server
+SERVER_DIR=$ROOT_DIR/remember-your-words/server
 
 echo start the database
 cd $ROOT_DIR

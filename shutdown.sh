@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ROOT_DIR=/Users/wangzhihao/Workspace/words
+ROOT_DIR=$( cd "$( dirname "$0" )" && pwd )
 
 echo shut down the mongo db
 
