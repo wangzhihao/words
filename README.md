@@ -13,8 +13,8 @@ It will adopt some learning techinques as Spaced_repetition.
 >
 > npm install -g strongloop
 
-3. The backend database is mongodb. create a database directory inside words, the directory name should be `database/`. Also add a `logs/` directory
->mkdir -p ./database/db
+3. The backend database is mongodb. create a database directory inside `words/`, the directory name should be `database/`. Also add a `logs/` directory
+>mkdir -p database/db
 >
 >mkdir logs
 
