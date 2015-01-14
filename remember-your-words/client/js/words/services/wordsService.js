@@ -6,6 +6,8 @@
 
 	function wordsService(Restangular){
 		var service = {
+			getCount : getCount,
+			getRandomList : getRandomList,
 			getWords : getWords,
 			removeWord : removeWord,
 			saveWord : saveWord,
@@ -18,8 +20,16 @@
 		
 		return service;
 
-		function getWords(){
-			return httpService.all('words').getList();
+		function getCount(){
+			return httpService.all('words').one('count').get();
+		}
+
+		function getRandomList(number){
+			return httpService.all('words').one('random').get({number : number});
+		}
+
+		function getWords(filter){
+			return httpService.all('words').getList({filter : filter});
 		}
 		
 		function removeWord(id){

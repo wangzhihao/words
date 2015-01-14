@@ -37,8 +37,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li ng-class="{ active : wordsCtrl.tab === 0}"><a href="#" ng-click="wordsCtrl.tab = 0">Today's words</a></li>
-                    <li ng-class="{ active : wordsCtrl.tab === 1}"><a href="#" ng-click="wordsCtrl.tab = 1">List all words</a>
+                    <li ng-class="{ active : wordsCtrl.tab === 0}"><a href="#" ng-click="wordsCtrl.tab = 0; wordsCtrl.showTodayWords()">Today's words</a></li>
+                    <li ng-class="{ active : wordsCtrl.tab === 1}"><a href="#" ng-click="wordsCtrl.tab = 1; wordsCtrl.showAllWords()">List all words</a>
                     </li>
                     <li><a ng-click="wordsCtrl.editWord()">Add a word</a>
                     </li>
@@ -50,7 +50,7 @@
     </nav>
 
     <div class="container">
-        <div ng-cloak ng-show="wordsCtrl.tab === 1" class="words-list">
+        <div class="words-list">
             <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="repeated-item item">
                 <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
             </div>
@@ -133,6 +133,7 @@
     <script src="js/words/directives/addTooltipDirective.js"></script>
     <script src="js/words/directives/wordsDialogLocalizationDirective.js"></script>
     <script src="js/words/directives/wordTagDirective.js"></script>
+    <script src="js/words/services/wordSelectionService.js"></script>
 
     <!-- other scripts -->
     <script src="js/non-angular/common.js"></script>

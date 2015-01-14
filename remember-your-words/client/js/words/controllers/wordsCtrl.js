@@ -2,24 +2,46 @@
 	angular.module('wordsApp')
 	.controller('wordsCtrl', wordsCtrl);
 
-	wordsCtrl.$inject = ['wordsService'];
+	wordsCtrl.$inject = ['wordsService', 'wordSelectionService'];
 
-	function wordsCtrl(wordsService){
+	function wordsCtrl(wordsService, wordSelectionService){
 		var ctrl = this;
 
+		ctrl.cache = [];
 		ctrl.words = {};
+		ctrl.number = 5;
 		ctrl.newWord = initialWord();
 		ctrl.saveFlag = 0;
 		ctrl.tab = 0;
 
 		ctrl.addNewExample = addNewExample;
 		ctrl.editWord = editWord;
-		ctrl.getAllWords = getAllWords;
+		ctrl.showAllWords = showAllWords;
+		ctrl.showTodayWords = showTodayWords;
 		ctrl.reset = reset;
 		ctrl.removeWord = removeWord;
 		ctrl.saveWord = saveWord;
+		
+		ctrl.showTodayWords();
+		
+		function showTodayWords(){
+			if(ctrl.cache['today']){
+				ctrl.words = ctrl.cache['today'];
+			}else{
+				wordSelectionService.randomSelect(ctrl.number, ctrl, ctrl.cache);
+			}
+		}
 
-		ctrl.getAllWords();
+		function showAllWords(){
+			if(ctrl.cache['all']){
+				ctrl.words = ctrl.cache['all'];
+			}else{
+				wordsService.getWords().then(function(data){
+					//console.log(data);
+					ctrl.words = ctrl.cache['all'] = data;
+				});
+			}
+		}
 
 		function addNewExample(word){
 			if( !word.examples ){
@@ -40,13 +62,6 @@
 			return {
 				examples : []
 			};
-		}
-
-		function getAllWords(){
-			wordsService.getWords().then(function(data){
-				//console.log(data);
-				ctrl.words = data;
-			});
 		}
 
 		function reset(word){
