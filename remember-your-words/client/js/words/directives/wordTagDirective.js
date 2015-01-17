@@ -9,7 +9,33 @@
         wordsCtrl : '=ctrlEntry'
        },
       link: function($scope, iElm, iAttrs, controller) {
-        //do nothing.
+        $scope.flip = false;
+        $scope.toggleFlip = toggleFlip;
+
+        var front = iElm.find('.front'),
+            back = iElm.find('.back'),
+            flipContainer = iElm.find('.flip-container');
+        
+        setHeight();
+
+        function toggleFlip() {
+          $scope.flip  = !$scope.flip;
+          setHeight();
+
+        }
+
+        function setHeight(){
+          flipContainer.css('height', Math.max(front.outerHeight(), back.outerHeight()));
+          if(!$scope.flip){
+            front.css('position', 'static');
+            back.css('position', 'absolute');
+            flipContainer.css('max-height', front.outerHeight() + 'px');
+          }else{
+            front.css('position', 'absolute');
+            back.css('position', 'static');
+            flipContainer.css('max-height', back.outerHeight() + 'px');
+          }
+        }
       }
     };
   });

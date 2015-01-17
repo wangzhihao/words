@@ -109,6 +109,15 @@ img{
 /* entire container, keeps perspective */
 .flip-container {
   cursor: ew-resize;
+  /* Initially we want show the front side. set a large value*/
+  max-height: 30000px;
+  overflow: hidden;
+
+  /* Set our transitions up. the time should be half of .flipper below */
+  -webkit-transition: max-height 3s;
+  -moz-transition: max-height 3s;
+  transition: max-height 3s;
+
   perspective: 2000px;
 }
   /* flip the pane when flip class is present. */
@@ -123,7 +132,8 @@ img{
 
 /* flip speed goes here */
 .flipper {
-  transition: 0.6s;
+  /*the time should be double of .flip-container above */
+  transition: 6s;
   transform-style: preserve-3d;
 
   position: relative;
@@ -134,12 +144,10 @@ img{
   backface-visibility: hidden;
 }
 /* align up the front and back, and set front side the same size as the back*/
-.front{
+.front, .back{
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 /* front pane, placed above back */

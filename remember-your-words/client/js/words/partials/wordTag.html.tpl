@@ -1,7 +1,6 @@
 <div class="flip-container"
-    ng-class="{'flip': toggleFlip}"
-    ng-init="toggleFlip = false"
-    ng-click="toggleFlip = !toggleFlip">
+    ng-class="{'flip': flip}"
+    ng-click="toggleFlip()">
     <div class="flipper">
         <div class="front jumbotron">
             <p>
