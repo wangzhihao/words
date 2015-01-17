@@ -14,12 +14,17 @@ a{
   cursor: pointer;
 }
 
+img{
+    max-width: 80%;
+}
+
 .words-example{
   margin: 5px 0;
 }
 
 .words-list .item {
 	position: relative;
+  margin: 30px 0;
 }
 
 .words-list .item .operations{
@@ -98,4 +103,57 @@ a{
 
 .black{
 	color: #777;
+}
+
+
+/* entire container, keeps perspective */
+.flip-container {
+  cursor: ew-resize;
+  perspective: 1000;
+}
+  /* flip the pane when flip class is present. */
+  .flip-container.flip .flipper {
+    transform: rotateY(180deg);
+  }
+
+/* make two sides have the same width.*/
+.flip-container, .front, .back {
+  width: 100%;
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front, .back{
+  backface-visibility: hidden;
+}
+/* align up the front and back, and set front side the same size as the back*/
+.front{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
+}
+
+.clear {
+    clear: both;
 }

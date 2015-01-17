@@ -8,6 +8,10 @@
       "type": "string",
       "required": true
     },
+    "context":{
+      "type": "string",
+      "required": true
+    },
     "definition": {
       "type": "string"
     },
