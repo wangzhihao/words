@@ -109,7 +109,7 @@ img{
 /* entire container, keeps perspective */
 .flip-container {
   cursor: ew-resize;
-  perspective: 1000;
+  perspective: 2000px;
 }
   /* flip the pane when flip class is present. */
   .flip-container.flip .flipper {
