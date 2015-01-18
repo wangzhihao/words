@@ -5,6 +5,7 @@
         <div class="front jumbotron">
             <p>
                 <span class="label label-default">Context :</span>
+
                 <span ng-bind="word.context"></span>
             </p>
         </div>

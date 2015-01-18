@@ -9,7 +9,7 @@
 
 		ctrl.cache = [];
 		ctrl.words = {};
-		ctrl.number = 2;
+		ctrl.number = 5;
 		ctrl.newWord = initialWord();
 		ctrl.saveFlag = 0;
 		ctrl.tab = 0;

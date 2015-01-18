@@ -1,7 +1,8 @@
 (function(angular){
 	angular.module('wordsApp', [
 		'restangular',
-		'ngAnimate'
+		'ngAnimate',
+		'hc.marked'
 		])
 
 	.config(function($sceDelegateProvider) {
@@ -12,5 +13,9 @@
 	    'http://*.youtube.com/**',
 	    'https://*.youtube.com/**'
 	  ]);
-});
+	})
+
+	.config(['markedProvider', function(markedProvider) {
+    markedProvider.setOptions({gfm: true});
+  }]);
 })(angular);
