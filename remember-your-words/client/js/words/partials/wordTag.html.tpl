@@ -12,9 +12,7 @@
             <p>
                 <span class="label label-primary" ng-bind="word.name"></span>
             </p>
-            <p>
-                <span class="definition" ng-bind="word.definition"></span>
-            </p>
+            <div marked="word.definition"></div>
             <div ng-if="word.examples.length">
                 <span class="label label-default">Examples :</span>
                 <p ng-repeat="example in word.examples">

@@ -36,7 +36,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li ng-class="{ active : wordsCtrl.tab === 0}"><a href="#" ng-click="wordsCtrl.tab = 0; wordsCtrl.showTodayWords()">Today's words</a></li>
+                    <li ng-class="{ active : wordsCtrl.tab === 0}"><a href="#" ng-click="wordsCtrl.tab = 0; wordsCtrl.showTodayWords()">Today's words</a>
+                    </li>
                     <li ng-class="{ active : wordsCtrl.tab === 1}"><a href="#" ng-click="wordsCtrl.tab = 1; wordsCtrl.showAllWords()">List all words</a>
                     </li>
                     <li><a ng-click="wordsCtrl.editWord()">Add a word</a>
@@ -74,10 +75,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="context">Context: </label>
-                                <textarea type="text" class="form-control" rows="3"  placeholder="context" id="context" ng-model="wordsCtrl.newWord.context">
+                                <span id="contextHelpBlock" class="help-block">You can use GitHub flavored markdown.</span>
+                                <textarea type="text" class="form-control" rows="3" placeholder="context" id="context" ng-model="wordsCtrl.newWord.context"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="define1">Define: </label>
+                                <span id="contextHelpBlock" class="help-block">You can use GitHub flavored markdown.</span>
                                 <textarea class="form-control" rows="3" placeholder="type the definition" id="define1" ng-model="wordsCtrl.newWord.definition"></textarea>
                             </div>
                             <div class="form-group">
