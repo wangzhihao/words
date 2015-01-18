@@ -30,6 +30,7 @@
       ]
     }
   },
+  "strict" : true,
   "validations": [],
   "relations": {},
   "acls": [],

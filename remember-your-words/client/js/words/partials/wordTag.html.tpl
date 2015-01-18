@@ -12,9 +12,12 @@
             <p>
                 <span class="label label-primary" ng-bind="word.name"></span>
             </p>
-            <div marked="word.definition"></div>
+            <div ng-if="word.definition">
+                <span class="label label-default">Definition</span>
+                <div marked="word.definition"></div>
+            </div>
             <div ng-if="word.examples.length">
-                <span class="label label-default">Examples :</span>
+                <span class="label label-default">Examples</span>
                 <p ng-repeat="example in word.examples">
                     <span ng-if="example.type === 'Text' " ng-bind="example.value"></span>
                     <img ng-if="example.type === 'Image'" ng-src="{{example.value}}">
