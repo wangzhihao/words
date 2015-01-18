@@ -4,10 +4,9 @@
     <div class="flipper">
         <div class="front jumbotron">
             <p>
-                <span class="label label-default">Context :</span>
-
-                <span ng-bind="word.context"></span>
+                <span class="label label-default">Context</span>
             </p>
+            <div marked="word.context"></div>
         </div>
         <div class="back jumbotron">
             <p>
