@@ -9,7 +9,6 @@
         wordsCtrl : '=ctrlEntry'
        },
       link: function($scope, iElm, iAttrs, controller) {
-        $scope.flip = false;
         $scope.toggleFlip = toggleFlip;
 
         var front = iElm.find('.front'),
@@ -20,14 +19,14 @@
         setHeight();
  
         function toggleFlip() {
-          $scope.flip  = !$scope.flip;
+          $scope.word.flip  = !$scope.word.flip;
           setHeight();
         }
 
         function setHeight(){
           var delay = 200, duration = 300;
           //flipContainer.css('height', Math.max(front.outerHeight(), back.outerHeight()));
-          if(!$scope.flip){
+          if(!$scope.word.flip){
             if(front.outerHeight() > back.outerHeight()){
               flipContainer.animate({height: front.outerHeight() + 'px'}, duration);
               //flipContainer.css('max-height', front.outerHeight() + 'px');
