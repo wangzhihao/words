@@ -102,7 +102,11 @@
 			}else{
 				wordsService.saveWord(word).then(function(data){
 					ctrl.saveFlag = 1;
-					ctrl.words.push(data);
+					if(wordsCtrl.tab === 1){
+						//in "List all words page".
+						ctrl.words.push(data);
+					}
+					ctrl.cache['all'].push(data);
 				},function(error){
 					ctrl.saveFlag = 2;
 				});
