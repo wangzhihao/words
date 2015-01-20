@@ -7,6 +7,7 @@
                 <span class="label label-default">Context</span>
             </p>
             <div marked="word.context"></div>
+            <div ng-if="word.source && word.source.trim() !== '' " marked=" '--From ' + word.source"></div>
         </div>
         <div class="back jumbotron">
             <p>

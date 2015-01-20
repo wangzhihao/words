@@ -12,6 +12,9 @@
       "type": "string",
       "required": true
     },
+    "source": {
+      "type": "string"
+    },
     "definition": {
       "type": "string"
     },
