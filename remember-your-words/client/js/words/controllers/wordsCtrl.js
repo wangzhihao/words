@@ -69,7 +69,10 @@
 				//deep copy.
 				ctrl.newWord = jQuery.extend(true, {}, word);
 			}else{
+				var source = ctrl.newWord.source;
 				ctrl.newWord = initialWord();
+				//keep the last source when adding a new word.
+				ctrl.newWord['source'] = source;
 			}
 			ctrl.saveFlag = 0;
 		}
