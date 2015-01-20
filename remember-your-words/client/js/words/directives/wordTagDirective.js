@@ -9,6 +9,7 @@
         wordsCtrl : '=ctrlEntry'
        },
       link: function($scope, iElm, iAttrs, controller) {
+        $scope.operationsPartial = 'js/words/partials/wordTagOperations.html.tpl';
         $scope.toggleFlip = toggleFlip;
 
         var front = iElm.find('.front'),
