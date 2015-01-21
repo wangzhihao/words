@@ -134,7 +134,8 @@ The following css makes the card able to flip. The flip consists of three steps:
 
 /* flip speed goes here */
 .flipper {
-  transition: .3s;
+  transition: .5s;
+  transition-timing-function: linear;
   transform-style: preserve-3d;
   position: relative;
 }
