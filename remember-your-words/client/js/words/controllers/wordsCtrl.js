@@ -16,26 +16,14 @@
 
 		ctrl.addNewExample = addNewExample;
 		ctrl.editWord = editWord;
-		ctrl.showRecentWords = showRecentWords;
-		ctrl.showTodayWords = showTodayWords;
 		ctrl.reset = reset;
 		ctrl.removeWord = removeWord;
 		ctrl.saveWord = saveWord;
 		
-		ctrl.showTodayWords();
-		
-		function showTodayWords(){
-			if(!ctrl.localService.todayCache){
-				ctrl.localService.todayCache = [];
-				wordSelectionService.randomSelect(ctrl.todayNumber, ctrl.localService);
-			}
-		}
-
-		function showRecentWords(){
-			if(!ctrl.localService.recentCache){
-				ctrl.localService.recentCache = [];
-				wordSelectionService.recent(ctrl.recentNumber, ctrl.localService);
-			}
+		init();
+		function init(){
+			wordSelectionService.randomSelect(ctrl.todayNumber, ctrl.localService);
+			wordSelectionService.recent(ctrl.recentNumber, ctrl.localService);
 		}
 
 		function addNewExample(word){

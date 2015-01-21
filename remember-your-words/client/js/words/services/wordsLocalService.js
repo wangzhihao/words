@@ -4,14 +4,14 @@
 
   function wordsLocalService() {
     var service = {
-      todayCache: undefined,
-      recentCache: undefined,
+      todayCache: [],
+      recentCache: [],
       addWordLocal: addWordLocal,
       removeWordLocal: removeWordLocal,
       editWordLocal: editWordLocal
     };
-    //all word list caches.
-    var caches = [service.todayCache, service.recentCache];
+    //all word list caches' name.
+    var cacheNames = ['todayCache', 'recentCache'];
 
     return service;
 
@@ -19,13 +19,15 @@
      * Replace the old word with the new word in every cache.
      */
     function editWordLocal(newWord) {
-      jQuery.each(caches, function(index, cache) {
+      jQuery.each(cacheNames, function(index, name) {
+      	var cache = service[name];
         if (cache) {
-          jQuery.each(cache, function(index, word) {
-            if (word.id === newWord.id) {
-              cache[index] = newWord;
-            }
-          });
+        	for(var i = cache.length - 1; i >= 0; i--){
+        		if(cache[i].id === newWord.id){
+        			cache.splice(i, 1, newWord);
+        			//console.log(service);
+        		}
+        	}
         }
       });
     };
@@ -35,6 +37,7 @@
     function addWordLocal(newWord) {
       if (service.recentCache) {
         service.recentCache.unshift(newWord);
+        //console.log(service);
       }
     };
 
@@ -42,11 +45,15 @@
      * Remove the word in every cache.
      */
     function removeWordLocal(word) {
-      jQuery.each(caches, function(index, cache) {
+      jQuery.each(cacheNames, function(index, name) {
+      	var cache = service[name];
         if (cache) {
-          cache = jQuery.grep(cache, function(item) {
-            return item.id !== word.id;
-          });
+        	for(var i = cache.length - 1; i >= 0; i--){
+        		if(cache[i].id === word.id){
+        			cache.splice(i, 1);
+        			//console.log(service);
+        		}
+        	}
         }
       });
     };

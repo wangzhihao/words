@@ -30,7 +30,7 @@
     	});
     }
 
-    function recent(number, cache){
+    function recent(number, service){
       var filter = {};
       filter['offset'] = 0;
       filter['limit'] = number;
