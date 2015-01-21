@@ -17,15 +17,30 @@
             flipper = iElm.find('.flipper'),
             flipContainer = iElm.find('.flip-container');
         
-        setHeight();
- 
+        var delay = 200, duration = 300;
+        
         function toggleFlip() {
           $scope.word.flip  = !$scope.word.flip;
           setHeight();
         }
 
+        $scope.$watch(function(){
+          return front.outerHeight();
+        }, function(val){
+          if(!$scope.word.flip){
+            flipContainer.animate({height: front.outerHeight() + 'px'}, duration);
+          }
+        });
+
+        $scope.$watch(function(){
+          return back.outerHeight();
+        }, function(val){
+          if($scope.word.flip){
+            flipContainer.animate({height: back.outerHeight() + 'px'}, duration);
+          }
+        });
+
         function setHeight(){
-          var delay = 200, duration = 300;
           //flipContainer.css('height', Math.max(front.outerHeight(), back.outerHeight()));
           if(!$scope.word.flip){
             if(front.outerHeight() > back.outerHeight()){
