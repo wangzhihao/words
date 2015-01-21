@@ -107,7 +107,7 @@ img{
 /*
 The following css makes the card able to flip. The flip consists of three steps:
  1. rotate 90 degree first.
- 2. swap the poisition of front side and back side
+ 2. swap the poisition of front side and back side (see the js part in wordTagDirective.js)
  3. rotate 90 degree in the end.
 */
 
