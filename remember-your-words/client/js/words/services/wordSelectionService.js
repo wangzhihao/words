@@ -24,7 +24,7 @@
           filter['limit'] = 1;
      			wordsService.getWords(filter).then(function(data){
             //console.log(data);
-    				service.todayCache = service.todayCache.concat(data);
+    				service.addToTodayCache(data);
     			});
     		}
     	});
@@ -36,7 +36,7 @@
       filter['limit'] = number;
       filter['order'] = 'create-date DESC';
       wordsService.getWords(filter).then(function(data){
-        service.recentCache = data;
+        service.addToRecentCache(data);
       });
     }
     return service;

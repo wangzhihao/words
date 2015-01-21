@@ -51,10 +51,10 @@
 
     <div class="container">
         <div class="words-list">
-            <div ng-show="wordsCtrl.tab === 0" ng-cloak ng-repeat="word in wordsCtrl.localService.todayCache" class="repeated-item item">
+            <div ng-show="wordsCtrl.tab === 0" ng-cloak ng-repeat="word in wordsCtrl.localService.getTodayCache()" class="repeated-item item">
                 <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
             </div>
-            <div ng-show="wordsCtrl.tab === 1" ng-cloak ng-repeat="word in wordsCtrl.localService.recentCache" class="repeated-item item">
+            <div ng-show="wordsCtrl.tab === 1" ng-cloak ng-repeat="word in wordsCtrl.localService.getRecentCache()" class="repeated-item item">
                 <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
             </div>
         </div>
