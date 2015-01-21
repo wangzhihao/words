@@ -17,52 +17,17 @@
             flipper = iElm.find('.flipper'),
             flipContainer = iElm.find('.flip-container');
         
-        var delay = 200, duration = 300;
-        
         function toggleFlip() {
-          $scope.word.flip  = !$scope.word.flip;
-          setHeight();
-        }
-
-        $scope.$watch(function(){
-          return front.outerHeight();
-        }, function(val){
-          if(!$scope.word.flip){
-            flipContainer.animate({height: front.outerHeight() + 'px'}, duration);
-          }
-        });
-
-        $scope.$watch(function(){
-          return back.outerHeight();
-        }, function(val){
-          if($scope.word.flip){
-            flipContainer.animate({height: back.outerHeight() + 'px'}, duration);
-          }
-        });
-
-        function setHeight(){
-          //flipContainer.css('height', Math.max(front.outerHeight(), back.outerHeight()));
-          if(!$scope.word.flip){
-            if(front.outerHeight() > back.outerHeight()){
-              flipContainer.animate({height: front.outerHeight() + 'px'}, duration);
-              //flipContainer.css('max-height', front.outerHeight() + 'px');
-            }else{
-              $timeout(function(){
-                flipContainer.animate({height: front.outerHeight() + 'px'}, duration);
-                //flipContainer.css('max-height', front.outerHeight() + 'px');
-              }, delay);
+          flipContainer.toggleClass('flip1');
+          flipper.one("transitionend", function(e){ 
+              console.log(e);
+              //swap the position value between front and back.
+              var css = front.css('position');
+              front.css('position', back.css('position'));
+              back.css('position', css);
+              flipContainer.toggleClass('flip2');
             }
-          }else{
-            if(front.outerHeight() < back.outerHeight()){
-              flipContainer.animate({height: back.outerHeight() + 'px'}, duration);
-              //flipContainer.css('max-height', back.outerHeight() + 'px');
-            }else{
-              $timeout(function(){
-                flipContainer.animate({height: back.outerHeight() + 'px'}, duration);
-                //flipContainer.css('max-height', back.outerHeight() + 'px');
-              }, delay);
-            }
-          }
+          ); 
         }
       }
     };

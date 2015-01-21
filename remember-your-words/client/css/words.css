@@ -104,19 +104,29 @@ img{
 	color: #777;
 }
 
+/*
+The following css makes the card able to flip. The flip consists of three steps:
+ 1. rotate 90 degree first.
+ 2. swap the poisition of front side and back side
+ 3. rotate 90 degree in the end.
+*/
 
 /* entire container, keeps perspective */
 .flip-container {
   cursor: ew-resize;
-  /*when using jQuery to animate the height, the overflow will be set to hidden, which is unwanted. */
-  overflow: visible !important;
   perspective: 2000px;
 }
-  /* flip the pane when flip class is present. */
-  .flip-container.flip .flipper {
-    transform: rotateY(180deg);
+  /* flip 90 degree at total if either .flip1 or .flip2 presents. */
+  .flip-container.flip1 .flipper,
+  .flip-container.flip2 .flipper{
+    transform: rotateY(90deg);
   }
 
+  /* flip 180 degree at total if both .flip1 and .flip2 presents. */
+  .flip-container.flip1.flip2 .flipper{
+    transform: rotateY(180deg);
+  }
+  
 /* make two sides have the same width.*/
 .flip-container, .front, .back {
   width: 100%;
@@ -124,10 +134,8 @@ img{
 
 /* flip speed goes here */
 .flipper {
-  /*the time should be double of .flip-container above */
-  transition: 0.6s;
+  transition: .3s;
   transform-style: preserve-3d;
-
   position: relative;
 }
 
@@ -135,8 +143,13 @@ img{
 .front, .back{
   backface-visibility: hidden;
 }
-/* align up the front and back, and set front side the same size as the back*/
-.front, .back{
+
+.front{
+  position: static;
+}
+
+/* align up the front and back*/
+.back{
   position: absolute;
   top: 0;
   left: 0;

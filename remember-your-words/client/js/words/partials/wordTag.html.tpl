@@ -1,5 +1,4 @@
 <div class="flip-container"
-    ng-class="{'flip': word.flip}"
     ng-dblClick="toggleFlip()">
     <div class="flipper">
         <div class="front jumbotron">
