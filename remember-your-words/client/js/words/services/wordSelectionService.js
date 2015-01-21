@@ -6,7 +6,8 @@
 
   function wordSelectionService(wordsService) {
     var service = {
-      randomSelect: randomSelect
+      randomSelect: randomSelect,
+      recent: recent 
     };
 
     /**
@@ -31,6 +32,16 @@
     			});
     		}
     	});
+    }
+
+    function recent(number, ctrl, cache){
+      var filter = {};
+      filter['offset'] = 0;
+      filter['limit'] = number;
+      filter['order'] = 'create-date DESC';
+      wordsService.getWords(filter).then(function(data){
+        ctrl.words = ctrl.cache['recent'] = data;
+      });
     }
     return service;
   };

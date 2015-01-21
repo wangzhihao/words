@@ -27,6 +27,9 @@
     "last-seen-date": {
       "type": "date"
     },
+    "create-date" : {
+      "type": "date"
+    },
     "examples": {
       "type": [
         "object"

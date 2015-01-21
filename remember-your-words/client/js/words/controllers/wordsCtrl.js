@@ -9,14 +9,15 @@
 
 		ctrl.cache = [];
 		ctrl.words = {};
-		ctrl.number = 5;
+		ctrl.todayNumber = 5;
+		ctrl.recentNumber = 5;
 		ctrl.newWord = initialWord();
 		ctrl.saveFlag = 0;
 		ctrl.tab = 0;
 
 		ctrl.addNewExample = addNewExample;
 		ctrl.editWord = editWord;
-		ctrl.showAllWords = showAllWords;
+		ctrl.showRecentWords = showRecentWords;
 		ctrl.showTodayWords = showTodayWords;
 		ctrl.reset = reset;
 		ctrl.removeWord = removeWord;
@@ -28,18 +29,15 @@
 			if(ctrl.cache['today']){
 				ctrl.words = ctrl.cache['today'];
 			}else{
-				wordSelectionService.randomSelect(ctrl.number, ctrl, ctrl.cache);
+				wordSelectionService.randomSelect(ctrl.todayNumber, ctrl, ctrl.cache);
 			}
 		}
 
-		function showAllWords(){
-			if(ctrl.cache['all']){
-				ctrl.words = ctrl.cache['all'];
+		function showRecentWords(){
+			if(ctrl.cache['recent']){
+				ctrl.words = ctrl.cache['recent'];
 			}else{
-				wordsService.getWords().then(function(data){
-					//console.log(data);
-					ctrl.words = ctrl.cache['all'] = data;
-				});
+				wordSelectionService.recent(ctrl.recentNumber, ctrl, ctrl.cache);
 			}
 		}
 
@@ -81,6 +79,12 @@
 			ctrl.words = jQuery.grep(ctrl.words, function(item){
   			return item.id !== word.id;
 			});
+			ctrl.cache['recent'] = jQuery.grep(ctrl.cache['recent'], function(item){
+  			return item.id !== word.id;
+			});
+			ctrl.cache['today'] = jQuery.grep(ctrl.cache['today'], function(item){
+  			return item.id !== word.id;
+			});
 		}
 
 		function removeWord(word){
@@ -103,13 +107,14 @@
 					ctrl.saveFlag = 2;
 				});
 			}else{
+				word['create-date'] = new Date();
 				wordsService.saveWord(word).then(function(data){
 					ctrl.saveFlag = 1;
 					if(wordsCtrl.tab === 1){
 						//in "List all words page".
 						ctrl.words.push(data);
 					}
-					ctrl.cache['all'].push(data);
+					ctrl.cache['recent'].push(data);
 				},function(error){
 					ctrl.saveFlag = 2;
 				});

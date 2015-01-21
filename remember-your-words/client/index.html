@@ -38,7 +38,7 @@
                 <ul class="nav navbar-nav">
                     <li ng-class="{ active : wordsCtrl.tab === 0}"><a href="#" ng-click="wordsCtrl.tab = 0; wordsCtrl.showTodayWords()">Today's words</a>
                     </li>
-                    <li ng-class="{ active : wordsCtrl.tab === 1}"><a href="#" ng-click="wordsCtrl.tab = 1; wordsCtrl.showAllWords()">List all words</a>
+                    <li ng-class="{ active : wordsCtrl.tab === 1}"><a href="#" ng-click="wordsCtrl.tab = 1; wordsCtrl.showRecentWords()">Recent added words</a>
                     </li>
                     <li><a ng-click="wordsCtrl.editWord()">Add a word</a>
                     </li>
@@ -51,7 +51,7 @@
 
     <div class="container">
         <div class="words-list">
-            <div ng-repeat="word in wordsCtrl.words | orderBy:'name'" class="repeated-item item">
+            <div ng-repeat="word in wordsCtrl.words" class="repeated-item item">
                 <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
             </div>
         </div>
