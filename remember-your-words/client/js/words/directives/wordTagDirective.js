@@ -20,7 +20,7 @@
         function toggleFlip() {
           flipContainer.toggleClass('flip1');
           flipper.one("transitionend", function(e){ 
-              console.log(e);
+              //console.log(e);
               //swap the position value between front and back.
               var css = front.css('position');
               front.css('position', back.css('position'));
