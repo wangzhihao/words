@@ -51,7 +51,10 @@
 
     <div class="container">
         <div class="words-list">
-            <div ng-repeat="word in wordsCtrl.words" class="repeated-item item">
+            <div ng-show="wordsCtrl.tab === 0" ng-cloak ng-repeat="word in wordsCtrl.localService.todayCache" class="repeated-item item">
+                <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
+            </div>
+            <div ng-show="wordsCtrl.tab === 1" ng-cloak ng-repeat="word in wordsCtrl.localService.recentCache" class="repeated-item item">
                 <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
             </div>
         </div>
@@ -147,6 +150,7 @@
     <script src="js/words/directives/wordsDialogLocalizationDirective.js"></script>
     <script src="js/words/directives/wordTagDirective.js"></script>
     <script src="js/words/services/wordSelectionService.js"></script>
+    <script src="js/words/services/wordsLocalService.js"></script>
 
     <!-- other scripts -->
     <script src="js/non-angular/common.js"></script>

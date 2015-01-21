@@ -2,13 +2,12 @@
 	angular.module('wordsApp')
 	.controller('wordsCtrl', wordsCtrl);
 
-	wordsCtrl.$inject = ['wordsService', 'wordSelectionService'];
+	wordsCtrl.$inject = ['wordsService', 'wordSelectionService', 'wordsLocalService'];
 
-	function wordsCtrl(wordsService, wordSelectionService){
+	function wordsCtrl(wordsService, wordSelectionService, wordsLocalService){
 		var ctrl = this;
 
-		ctrl.cache = [];
-		ctrl.words = {};
+		ctrl.localService = wordsLocalService;
 		ctrl.todayNumber = 5;
 		ctrl.recentNumber = 5;
 		ctrl.newWord = initialWord();
@@ -26,18 +25,16 @@
 		ctrl.showTodayWords();
 		
 		function showTodayWords(){
-			if(ctrl.cache['today']){
-				ctrl.words = ctrl.cache['today'];
-			}else{
-				wordSelectionService.randomSelect(ctrl.todayNumber, ctrl, ctrl.cache);
+			if(!ctrl.localService.todayCache){
+				ctrl.localService.todayCache = [];
+				wordSelectionService.randomSelect(ctrl.todayNumber, ctrl.localService);
 			}
 		}
 
 		function showRecentWords(){
-			if(ctrl.cache['recent']){
-				ctrl.words = ctrl.cache['recent'];
-			}else{
-				wordSelectionService.recent(ctrl.recentNumber, ctrl, ctrl.cache);
+			if(!ctrl.localService.recentCache){
+				ctrl.localService.recentCache = [];
+				wordSelectionService.recent(ctrl.recentNumber, ctrl.localService);
 			}
 		}
 
@@ -75,24 +72,9 @@
 			ctrl.saveFlag = 0;
 		}
 
-		function removeWordLocal(word){
-			ctrl.words = jQuery.grep(ctrl.words, function(item){
-  			return item.id !== word.id;
-			});
-			ctrl.cache['recent'] = jQuery.grep(ctrl.cache['recent'], function(item){
-  			return item.id !== word.id;
-			});
-			ctrl.cache['today'] = jQuery.grep(ctrl.cache['today'], function(item){
-  			return item.id !== word.id;
-			});
-		}
-
 		function removeWord(word){
-			removeWordLocal(word);
 			wordsService.removeWord(word.id).then(function(data){
-				//do nothing.
-			},function(error){
-				ctrl.words.push(word);
+				ctrl.localService.removeWordLocal(word);
 			});
 		}
 
@@ -101,8 +83,7 @@
 			if(word.id){
 				wordsService.updateWord(word).then(function(data){
 					ctrl.saveFlag = 1;
-					removeWordLocal(word);
-					ctrl.words.push(data);
+					ctrl.localService.editWordLocal(word);
 				},function(error){
 					ctrl.saveFlag = 2;
 				});
@@ -110,11 +91,7 @@
 				word['create-date'] = new Date();
 				wordsService.saveWord(word).then(function(data){
 					ctrl.saveFlag = 1;
-					if(wordsCtrl.tab === 1){
-						//in "List all words page".
-						ctrl.words.push(data);
-					}
-					ctrl.cache['recent'].push(data);
+					ctrl.localService.addWordLocal(word);
 				},function(error){
 					ctrl.saveFlag = 2;
 				});
