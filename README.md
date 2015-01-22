@@ -23,9 +23,16 @@ It will adopt some learning techinques as Spaced_repetition.
 >
 > npm install
 
-4. Start the database and web server via shell script, you can shut down the site via `shutdown.sh` 
+5. Start the database and web server via shell script, you can shut down the site via `shutdown.sh` 
 > cd words
 >
->run.sh
 
-5. visit the site via 0.0.0.0/3000 (You can check the listening URL in logs file.)
+6. Run the database scripts(Mainly to create some indexes. ) Execute the following script:
+>	$bash: mongo
+> \> use words
+> \> load('data-backup/mongoScript.js');
+
+7. Run the app.
+> run.sh
+
+8. visit the site via 0.0.0.0/3000 (You can check the listening URL in logs file.)
