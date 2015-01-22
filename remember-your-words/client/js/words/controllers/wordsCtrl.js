@@ -94,7 +94,7 @@
 				word['create-date'] = new Date();
 				wordsService.saveWord(word).then(function(data){
 					ctrl.saveFlag = 1;
-					ctrl.localService.addWordLocal(word);
+					ctrl.localService.addWordLocal(data);
 				},function(error){
 					ctrl.saveFlag = 2;
 				});
