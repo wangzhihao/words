@@ -6,8 +6,11 @@
     var service = {
     	addToTodayCache : addToTodayCache,
     	addToRecentCache : addToRecentCache,
+      addToSearchCache : addToSearchCache,
+      getSearchCache : getSearchCache,
     	getTodayCache : getTodayCache,
     	getRecentCache : getRecentCache,
+      clearSearchCache : clearSearchCache,
       addWordLocal: addWordLocal,
       removeWordLocal: removeWordLocal,
       editWordLocal: editWordLocal
@@ -15,10 +18,18 @@
 
     var _todayCache = [],
       _recentCache = [],
+      _searchCache = [],
       //all word list caches.
-      _caches = [_todayCache, _recentCache];
+      _caches = [_todayCache, _recentCache, _searchCache];
 
     return service;
+    function clearSearchCache(){
+      _searchCache.splice(0, _searchCache.length);
+    }
+
+    function getSearchCache(){
+      return _searchCache;
+    }
 
     function getTodayCache(){
     	return _todayCache;
@@ -26,6 +37,10 @@
 
     function getRecentCache(){
     	return _recentCache;
+    }
+
+    function addToSearchCache(data){
+      _addToCache(_searchCache, data);
     }
 
     function addToTodayCache(data){

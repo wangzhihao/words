@@ -16,7 +16,6 @@
 		//To support full-text search
 		ctrl.searchText = '';
 		ctrl.searchRecords = 5;
-		ctrl.searchResults = [];
 
 		ctrl.addNewExample = addNewExample;
 		ctrl.editWord = editWord;
@@ -33,11 +32,11 @@
 
 		function search(){
 			if(ctrl.searchText && ctrl.searchText.trim() !== ''){
-				ctrl.searchResults = [];
+				ctrl.localService.clearSearchCache();
 				//search results tab.
 				ctrl.tab = 2;
 				wordsService.search(ctrl.searchText, ctrl.searchRecords).then(function(data){
-					ctrl.searchResults = data.words;
+					ctrl.localService.addToSearchCache(data.words);
 				});
 			}
 		}
