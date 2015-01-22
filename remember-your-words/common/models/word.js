@@ -17,6 +17,11 @@ module.exports = function(Word) {
 		.limit(records)
 		.toArray(function(err, words){
 	  	//console.log(words);
+	  	for(var i = words.length - 1; i >= 0; i--){
+	  		//Rename fields
+    		words[i].id = words[i]._id;
+    		delete words[i]._id;
+	  	}
 	    cb(err, words);
 		});
 	}

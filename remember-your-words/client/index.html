@@ -70,7 +70,7 @@
                 <div ng-repeat="word in wordsCtrl.searchResults" class="repeated-item item">
                     <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
                 </div>
-                <p><strong>Only the top <span ng-bind="wordsCtrl.searchRecords"></span> records are shown.</strong></p>
+                <p ng-if="wordsCtrl.searchResults.length"><strong>Only the top <span ng-bind="wordsCtrl.searchRecords"></span> records are shown.</strong></p>
             </div>
         </div>
     </div>
