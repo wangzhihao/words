@@ -29,7 +29,9 @@ It will adopt some learning techinques as Spaced_repetition.
 
 6. Run the database scripts(Mainly to create some indexes. ) Execute the following script:
 >	$bash: mongo
+>
 > \> use words
+>
 > \> load('data-backup/mongoScript.js');
 
 7. Run the app.
