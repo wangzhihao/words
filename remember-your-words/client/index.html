@@ -60,11 +60,17 @@
             <div ng-show="wordsCtrl.tab === 0" ng-cloak ng-repeat="word in wordsCtrl.localService.getTodayCache()" class="repeated-item item">
                 <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
             </div>
-            <div ng-show="wordsCtrl.tab === 1" ng-cloak ng-repeat="word in wordsCtrl.localService.getRecentCache()" class="repeated-item item">
-                <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
+            <div ng-show="wordsCtrl.tab === 1" ng-cloak>
+                <div ng-repeat="word in wordsCtrl.localService.getRecentCache()" class="repeated-item item">
+                    <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
+                </div>
+                <p><strong>Only the latest <span ng-bind="wordsCtrl.recentNumber"></span> records are shown.</strong></p>
             </div>
-            <div ng-show="wordsCtrl.tab === 2" ng-cloak ng-repeat="word in wordsCtrl.searchResults" class="repeated-item item">
-                <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
+            <div ng-show="wordsCtrl.tab === 2" ng-cloak >
+                <div ng-repeat="word in wordsCtrl.searchResults" class="repeated-item item">
+                    <div word-tag word-entry="word" ctrl-entry="wordsCtrl"></div>
+                </div>
+                <p><strong>Only the top <span ng-bind="wordsCtrl.searchRecords"></span> records are shown.</strong></p>
             </div>
         </div>
     </div>
