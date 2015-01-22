@@ -32,12 +32,14 @@
 		}
 
 		function search(){
-			ctrl.searchResults = [];
-			//search results tab.
-			ctrl.tab = 2;
-			wordsService.search(ctrl.searchText, ctrl.searchRecords).then(function(data){
-				ctrl.searchResults = data.words;
-			});
+			if(ctrl.searchText && ctrl.searchText.trim() !== ''){
+				ctrl.searchResults = [];
+				//search results tab.
+				ctrl.tab = 2;
+				wordsService.search(ctrl.searchText, ctrl.searchRecords).then(function(data){
+					ctrl.searchResults = data.words;
+				});
+			}
 		}
 
 		function addNewExample(word){

@@ -16,7 +16,7 @@ module.exports = function(Word) {
 		.sort( { score: { $meta: "textScore" } } )
 		.limit(records)
 		.toArray(function(err, words){
-	  	console.log(words);
+	  	//console.log(words);
 	    cb(err, words);
 		});
 	}
