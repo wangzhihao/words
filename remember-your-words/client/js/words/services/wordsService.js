@@ -1,47 +1,59 @@
-(function(angular){
-	angular.module('wordsApp')
-	.factory('wordsService', wordsService);
+(function(angular) {
+  angular.module('wordsApp')
+    .factory('wordsService', wordsService);
 
-	wordsService.$inject = ['Restangular'];
+  wordsService.$inject = ['Restangular'];
 
-	function wordsService(Restangular){
-		var service = {
-			getCount : getCount,
-			getRandomList : getRandomList,
-			getWords : getWords,
-			removeWord : removeWord,
-			saveWord : saveWord,
-			updateWord : updateWord
-		};
+  function wordsService(Restangular) {
+    var service = {
+      getCount: getCount,
+      getRandomList: getRandomList,
+      getWords: getWords,
+      removeWord: removeWord,
+      saveWord: saveWord,
+      search: search,
+      updateWord: updateWord
+    };
 
-		var httpService = Restangular.withConfig(function(RestangularConfigurer) {
-	      RestangularConfigurer.setBaseUrl('api');
-	  });
-		
-		return service;
+    var httpService = Restangular.withConfig(function(RestangularConfigurer) {
+      RestangularConfigurer.setBaseUrl('api');
+    });
 
-		function getCount(){
-			return httpService.all('words').one('count').get();
-		}
+    return service;
 
-		function getRandomList(number){
-			return httpService.all('words').one('random').get({number : number});
-		}
+    function getCount() {
+      return httpService.all('words').one('count').get();
+    }
 
-		function getWords(filter){
-			return httpService.all('words').getList({filter : filter});
-		}
-		
-		function removeWord(id){
-			return httpService.all('words').one(id).remove();
-		}
+    function getRandomList(number) {
+      return httpService.all('words').one('random').get({
+        number: number
+      });
+    }
 
-		function saveWord(word){
-			return httpService.all('words').post(word);
-		}
+    function getWords(filter) {
+      return httpService.all('words').getList({
+        filter: filter
+      });
+    }
 
-		function updateWord(word){
-			return httpService.all('words').one(word.id).customPUT(word);
-		}
-	};
+    function removeWord(id) {
+      return httpService.all('words').one(id).remove();
+    }
+
+    function saveWord(word) {
+      return httpService.all('words').post(word);
+    }
+
+    function search(text, records) {
+      return httpService.all('words').one('search').get({
+        text : text,
+        records : records
+      });
+    }
+
+    function updateWord(word) {
+      return httpService.all('words').one(word.id).customPUT(word);
+    }
+  };
 })(angular);

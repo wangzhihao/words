@@ -13,17 +13,31 @@
 		ctrl.newWord = initialWord();
 		ctrl.saveFlag = 0;
 		ctrl.tab = 0;
+		//To support full-text search
+		ctrl.searchText = '';
+		ctrl.searchRecords = 5;
+		ctrl.searchResults = [];
 
 		ctrl.addNewExample = addNewExample;
 		ctrl.editWord = editWord;
 		ctrl.reset = reset;
 		ctrl.removeWord = removeWord;
 		ctrl.saveWord = saveWord;
+		ctrl.search = search;
 		
 		init();
 		function init(){
 			wordSelectionService.randomSelect(ctrl.todayNumber, ctrl.localService);
 			wordSelectionService.recent(ctrl.recentNumber, ctrl.localService);
+		}
+
+		function search(){
+			ctrl.searchResults = [];
+			//search results tab.
+			ctrl.tab = 2;
+			wordsService.search(ctrl.searchText, ctrl.searchRecords).then(function(data){
+				ctrl.searchResults = data.words;
+			});
 		}
 
 		function addNewExample(word){
