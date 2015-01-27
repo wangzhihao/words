@@ -4,6 +4,9 @@ It will adopt some learning techinques as Spaced_repetition.
 
 **The demo of this site is already deployed in https://contexter.herokuapp.com/**
 
+![image1]
+[image1]: https://www.diigo.com/item/image/4eiww/3yjr
+
 ##Installation
 1. Clone this repo into your computer, namely `words/`
 >git clone https://github.com/wangzhihao/words.git
