@@ -2,7 +2,7 @@
 
 ROOT_DIR=$( cd "$( dirname "$0" )" && pwd )
 
-SERVER_DIR=$ROOT_DIR/remember-your-words/server
+SERVER_DIR=$ROOT_DIR/server
 
 echo start the database
 cd $ROOT_DIR
