@@ -2,6 +2,10 @@
 This is a web site which helps your store your new words(vocabulary) and remember these words more efficiently and easily.
 It will adopt some learning techinques as Spaced_repetition.
 
+**The demo of this site is already deployed in https://contexter.herokuapp.com/**
+
+<img src="https://www.diigo.com/file/image/qdrsesezcesscbaodzbpqaapbq/Contexter.jpg" alt="alt text" height="800px">
+
 ##Installation
 1. Clone this repo into your computer, namely `words/`
 >git clone https://github.com/wangzhihao/words.git
