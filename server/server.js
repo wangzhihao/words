@@ -16,7 +16,7 @@ app.use(loopback.static(path.resolve(__dirname, '../client')));
 
 app.start = function() {
   // start the web server
-  return app.listen(function() {
+  return app.listen(8000, function() {
     app.emit('started');
     console.log('Web server listening at: %s', app.get('url'));
   });
