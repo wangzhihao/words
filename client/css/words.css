@@ -115,64 +115,75 @@ The following css makes the card able to flip. The flip consists of three steps:
  2. swap the poisition of front side and back side (see the js part in wordTagDirective.js)
  3. rotate 90 degree in the end.
 */
+@media (min-width: 768px) {
+  /* entire container, keeps perspective */
+  .flip-container {
+    cursor: ew-resize;
+    perspective: 2000px;
+  }
+    /* flip 90 degree at total if either .flip1 or .flip2 presents. */
+    .flip-container.flip1 .flipper,
+    .flip-container.flip2 .flipper{
+      transform: rotateY(90deg);
+    }
 
-/* entire container, keeps perspective */
-.flip-container {
-  cursor: ew-resize;
-  perspective: 2000px;
-}
-  /* flip 90 degree at total if either .flip1 or .flip2 presents. */
-  .flip-container.flip1 .flipper,
-  .flip-container.flip2 .flipper{
-    transform: rotateY(90deg);
+    /* flip 180 degree at total if both .flip1 and .flip2 presents. */
+    .flip-container.flip1.flip2 .flipper{
+      transform: rotateY(180deg);
+    }
+    
+  /* make two sides have the same width.*/
+  .flip-container, .front, .back {
+    width: 100%;
   }
 
-  /* flip 180 degree at total if both .flip1 and .flip2 presents. */
-  .flip-container.flip1.flip2 .flipper{
+  /* flip speed goes here */
+  .flipper {
+    transition: .3s;
+    transition-timing-function: linear;
+    transform-style: preserve-3d;
+    position: relative;
+  }
+
+  /* hide back of pane during swap */
+  .front, .back{
+    backface-visibility: hidden;
+  }
+
+  .front{
+    position: static;
+  }
+
+  /* align up the front and back*/
+  .back{
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /* front pane, placed above back */
+  .front {
+    z-index: 2;
+    /* for firefox 31 */
+    transform: rotateY(0deg);
+  }
+
+  /* back, initially hidden pane */
+  .back {
     transform: rotateY(180deg);
   }
-  
-/* make two sides have the same width.*/
-.flip-container, .front, .back {
-  width: 100%;
-}
-
-/* flip speed goes here */
-.flipper {
-  transition: .3s;
-  transition-timing-function: linear;
-  transform-style: preserve-3d;
-  position: relative;
-}
-
-/* hide back of pane during swap */
-.front, .back{
-  backface-visibility: hidden;
-}
-
-.front{
-  position: static;
-}
-
-/* align up the front and back*/
-.back{
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/* front pane, placed above back */
-.front {
-  z-index: 2;
-  /* for firefox 31 */
-  transform: rotateY(0deg);
-}
-
-/* back, initially hidden pane */
-.back {
-  transform: rotateY(180deg);
 }
 
 .clear {
     clear: both;
+}
+
+.dangerous-operations{
+  display: inline;
+}
+
+@media (max-width: 768px) {
+  .dangerous-operations{
+    display: none;
+  }
 }
