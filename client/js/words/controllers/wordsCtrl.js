@@ -68,9 +68,11 @@
 				ctrl.newWord = jQuery.extend(true, {}, word);
 			}else{
 				var source = ctrl.newWord.source;
+				var context = ctrl.newWord.context;
 				ctrl.newWord = initialWord();
-				//keep the last source when adding a new word.
+				//keep the last source and context when adding a new word.
 				ctrl.newWord['source'] = source;
+				ctrl.newWord['context'] = context;
 			}
 			ctrl.saveFlag = 0;
 		}
