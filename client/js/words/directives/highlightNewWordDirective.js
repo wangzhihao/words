@@ -8,7 +8,7 @@
           //see http://stackoverflow.com/questions/22081140/how-to-execute-parent-directive-before-child-directive
           pre: function preLink($scope, iElement, iAttrs, controller) {
             //Whenever the context is changed, change the formattedContext.
-            $scope.$watch($scope.word.context, function(){
+            $scope.$watch('word.context', function(){
               $scope.word.formattedContext = highlight($scope.word.context, $scope.word.name);
             });
    
