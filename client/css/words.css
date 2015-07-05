@@ -1,6 +1,10 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
+
+.jumbotron{
+  background-color: white !important;
+}
 /*
 For the bootstrap's fixed navbar.
 See http://stackoverflow.com/questions/11124777/twitter-bootstrap-navbar-fixed-top-overlapping-site
@@ -8,6 +12,7 @@ See http://stackoverflow.com/questions/11124777/twitter-bootstrap-navbar-fixed-t
 body {
   padding-top: 70px;
   padding-bottom: 50px;
+  background-color: #565656;
 }
 
 td, th {
