@@ -23,6 +23,7 @@
 		ctrl.removeWord = removeWord;
 		ctrl.saveWord = saveWord;
 		ctrl.search = search;
+		ctrl.formatContext = formatContext;
 		
 		init();
 		function init(){
@@ -101,6 +102,10 @@
 					ctrl.saveFlag = 2;
 				});
 			}
+		}
+
+		function formatContext(word){
+			return word.formattedContext.replace(/(^|\n)/g, '$1>');
 		}
 	};
 })(angular);
