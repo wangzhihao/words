@@ -40,6 +40,7 @@ img{
 
 .words-list .item .operations .edit,
 .words-list .item .operations .search-on-google,
+.words-list .item .operations .search-on-oed,
 .words-list .item .operations .delete{
   margin-right: 20px;
 }
