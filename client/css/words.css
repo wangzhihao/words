@@ -2,6 +2,9 @@
   display: none !important;
 }
 /*Override the bootstrap default settings*/
+.label{
+  font-size: 100%;
+}
 .jumbotron{
   background-color: white;
 }
