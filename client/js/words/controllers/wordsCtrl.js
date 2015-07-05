@@ -7,6 +7,7 @@
 	function wordsCtrl(wordsService, wordSelectionService, wordsLocalService){
 		var ctrl = this;
 
+		ctrl.LINE_HEAD = /(^|\n)/g;
 		ctrl.localService = wordsLocalService;
 		ctrl.todayNumber = 5;
 		ctrl.recentNumber = 5;
@@ -23,7 +24,6 @@
 		ctrl.removeWord = removeWord;
 		ctrl.saveWord = saveWord;
 		ctrl.search = search;
-		ctrl.formatContext = formatContext;
 		
 		init();
 		function init(){
@@ -102,10 +102,6 @@
 					ctrl.saveFlag = 2;
 				});
 			}
-		}
-
-		function formatContext(word){
-			return word.formattedContext.replace(/(^|\n)/g, '$1>');
 		}
 	};
 })(angular);
