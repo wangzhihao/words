@@ -1,4 +1,4 @@
-<div class="flip-container"
+<div class="flip-container single-word"
     ng-dblClick="toggleFlip()">
     <div class="flipper">
         <div class="front jumbotron">
@@ -8,7 +8,7 @@
             <div highlight-new-word>
                 <div marked="(word.formattedContext || '').replace(wordsCtrl.LINE_HEAD, '$1>');"></div>
             </div>
-            <div ng-if="word.source && word.source.trim() !== '' " marked=" '--From ' + word.source"></div>
+            <div class="source" ng-if="word.source && word.source.trim() !== '' " marked=" '--From ' + word.source"></div>
             <div ng-include="operationsPartial"></div>
         </div>
         <div class="back jumbotron">

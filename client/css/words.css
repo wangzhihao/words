@@ -1,9 +1,13 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
-
+/*Override the bootstrap default settings*/
 .jumbotron{
-  background-color: white !important;
+  background-color: white;
+}
+.jumbotron p {
+  font-family: Arial, sans-serif;
+  font-size: 15px;
 }
 /*
 For the bootstrap's fixed navbar.
@@ -192,4 +196,8 @@ The following css makes the card able to flip. The flip consists of three steps:
   .dangerous-operations{
     display: none;
   }
+}
+
+.single-word .source{
+  text-align: right;
 }
