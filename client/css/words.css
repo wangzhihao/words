@@ -5,6 +5,11 @@
 .label{
   font-size: 100%;
 }
+
+.container .jumbotron, 
+.container-fluid .jumbotron {
+    overflow: auto;
+}
 .jumbotron{
   background-color: white;
 }
