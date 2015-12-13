@@ -2,7 +2,7 @@
 
 ROOT_DIR=$( cd "$( dirname "$0" )" && pwd )
 
-SERVER_DIR=$ROOT_DIR/server
+SERVER_DIR=$ROOT_DIR
 
 echo start the server
 cd $SERVER_DIR
