@@ -13,7 +13,9 @@ It will adopt some learning techinques as Spaced_repetition.
 >cd words
 
 2. Install mongodb and strongloop
->brew install mongodb
+>
+> On Mac: brew install mongodb
+> On Unbuntu: https://docs.mongodb.org/v3.0/tutorial/install-mongodb-on-ubuntu/
 >
 > npm install -g strongloop
 
@@ -23,8 +25,6 @@ It will adopt some learning techinques as Spaced_repetition.
 >mkdir logs
 
 4. Install node dependent packages
-> cd remember-your-words
->
 > npm install
 
 5. Start the database and web server via shell script, you can shut down the site via `shutdown.sh` 
@@ -36,9 +36,9 @@ It will adopt some learning techinques as Spaced_repetition.
 >
 > \> use words
 >
-> \> load('data-backup/mongoScript.js');
+> \> load('databaseScripts/mongoScript.js');
 
 7. Run the app.
 > run.sh
 
-8. visit the site via 0.0.0.0/3000 (You can check the listening URL in logs file.)
+8. visit the site via 0.0.0.0/3010 (You can check the listening URL in logs file.)
